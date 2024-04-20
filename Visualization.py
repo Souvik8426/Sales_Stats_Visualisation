@@ -79,7 +79,7 @@ def index():
                 ORDER BY RATING;
                 """
     df5 = pd.read_sql(query5, cnxn)
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(5, 4))
     sns.barplot(x='RATING', y='Purchase_Count', data=df5)
     plt.xlabel('Rating')
     plt.ylabel('Number of Products')
@@ -95,7 +95,7 @@ def index():
                 ORDER BY Purchase_Count DESC;
                 """
     df6 = pd.read_sql(query6, cnxn)
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(5, 4))
     sns.barplot(x='MODEL_ATTR', y='Purchase_Count', data=df6)
     plt.xlabel('Model Attribute')
     plt.ylabel('Purchase Count')
@@ -166,7 +166,7 @@ def index():
             WHERE rank <= 3;
             """
     df9 = pd.read_sql(query9, cnxn)
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(4, 6))
     plt.bar(df9['BRAND'], df9['Avg_Rating'], color='skyblue')
     plt.xlabel('Brand')
     plt.ylabel('Average Rating')
