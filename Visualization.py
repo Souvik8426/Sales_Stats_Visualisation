@@ -1,3 +1,4 @@
+import numpy as np
 import pyodbc
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -29,18 +30,28 @@ def index():
 
     #############  QUERY-2: Number of purchases based on brand ###############
     query2 = """
-                    SELECT BRAND, COUNT(*) AS Purchase_Count 
-                    FROM PRODUCT GROUP BY BRAND;
-                    """
+                SELECT BRAND, COUNT(*) AS Purchase_Count 
+                FROM PRODUCT GROUP BY BRAND;
+                """
     df2 = pd.read_sql(query2, cnxn)
+    
+    # Define a custom color palette
+    palette = sns.color_palette("muted", len(df2['BRAND']))
+    
     plt.figure(figsize=(9 , 5))
-    sns.barplot(x='BRAND', y='Purchase_Count', data=df2)
+    sns.barplot(x='BRAND', y='Purchase_Count', data=df2, palette=palette)
     plt.xlabel('Brand')
     plt.ylabel('Purchase Count')
     plt.title('Number of Purchases Based on Brand')
     plt.xticks(rotation=45)
+    plt.legend(loc="best", fontsize=12)
+    plt.grid(False)
+    
+    # Adjust the bottom margin to prevent the x-axis labels from getting cropped
+    plt.subplots_adjust(bottom=0.2)
+    
     Viz2 = 'static/Brand_Purchases.png'
-    plt.savefig(Viz2)
+    plt.savefig(Viz2, dpi=300)
     plt.close()
 
     #############  QUERY-3: Number of purchases based on item_id ###############
@@ -65,11 +76,17 @@ def index():
                 SELECT USER_ATTR, COUNT(*) AS Purchase_Count 
                 FROM USERS GROUP BY USER_ATTR;"""
     df4 = pd.read_sql(query4, cnxn)
+    import matplotlib.cm as cm
+    colors = cm.rainbow(np.linspace(0, 1, len(df4['USER_ATTR'])))
     plt.figure(figsize=(7, 7))
-    plt.pie(df4['Purchase_Count'], labels=df4['USER_ATTR'], autopct='%1.1f%%', startangle=140)
+    plt.pie(df4['Purchase_Count'], labels=df4['USER_ATTR'], autopct='%1.1f%%', startangle=140, colors=colors, shadow=True)
     plt.title('Number of Purchases Based on User Attribute')
+    plt.legend(loc="best", fontsize=12)
+    plt.grid(True, linestyle='--', linewidth=1.5, color='gray')
+    plt.xlabel('')
+    plt.ylabel('Number of Purchases')
     Viz4 = 'static/Purchases_Per_Attributes.png'
-    plt.savefig(Viz4)
+    plt.savefig(Viz4, dpi=300)
     plt.close()
 
     #############  QUERY-5: Number of products with different ratings ###############
