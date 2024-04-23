@@ -23,7 +23,6 @@ def index():
     sns.barplot(x='YEAR', y='Purchase_Count', data=df1)
     plt.xlabel('Year')
     plt.ylabel('Purchase Count')
-    plt.title('Number of Purchases According to Years')
     Viz1 = 'static/Purchases_Per_Year.png'
     plt.savefig(Viz1)
     plt.close()
@@ -65,7 +64,6 @@ def index():
     sns.barplot(x='ITEM_ID', y='Purchase_Count', data=df3)
     plt.xlabel('Item ID')
     plt.ylabel('Purchase Count')
-    plt.title('Number of Purchases Based on Item ID')
     plt.xticks(rotation=45)
     Viz3 = 'static/Purchases_Per_ItemID.png'
     plt.savefig(Viz3)
@@ -78,15 +76,14 @@ def index():
     df4 = pd.read_sql(query4, cnxn)
     import matplotlib.cm as cm
     colors = cm.rainbow(np.linspace(0, 1, len(df4['USER_ATTR'])))
-    plt.figure(figsize=(7, 7))
+    plt.figure(figsize=(8, 8))
     plt.pie(df4['Purchase_Count'], labels=df4['USER_ATTR'], autopct='%1.1f%%', startangle=140, colors=colors, shadow=True)
-    plt.title('Number of Purchases Based on User Attribute')
     plt.legend(loc="best", fontsize=12)
     plt.grid(True, linestyle='--', linewidth=1.5, color='gray')
     plt.xlabel('')
     plt.ylabel('Number of Purchases')
     Viz4 = 'static/Purchases_Per_Attributes.png'
-    plt.savefig(Viz4, dpi=300)
+    plt.savefig(Viz4, dpi=400)
     plt.close()
 
     #############  QUERY-5: Number of products with different ratings ###############
