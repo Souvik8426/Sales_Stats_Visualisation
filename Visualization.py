@@ -18,12 +18,29 @@ def index():
                     FROM PURCHASE
                     GROUP BY YEAR ORDER BY YEAR;
                     """
+    # Execute SQL query and read data into DataFrame
     df1 = pd.read_sql_query(query1, cnxn)
+
+    # Set the style of seaborn plots
+    sns.set_style("whitegrid")
+
+    # Create the plot
     plt.figure(figsize=(10, 6))
-    sns.barplot(x='YEAR', y='Purchase_Count', data=df1)
+    sns.barplot(x='YEAR', y='Purchase_Count', data=df1, palette="viridis")
+    plt.title('Purchase Count by Year')
     plt.xlabel('Year')
     plt.ylabel('Purchase Count')
+
+    # Rotate x-axis labels for better readability
+    plt.xticks(rotation=45)
+
+    # Add data labels to the bars
+    for index, row in df1.iterrows():
+        plt.text(row.name, row['Purchase_Count'] + 0.2, row['Purchase_Count'], ha='center', color='black')
+
+    # Save the plot to a file
     Viz1 = 'static/Purchases_Per_Year.png'
+    plt.tight_layout()
     plt.savefig(Viz1)
     plt.close()
 
@@ -59,13 +76,29 @@ def index():
                     FROM PRODUCT GROUP BY ITEM_ID 
                     ORDER BY Purchase_Count DESC;
                     """
+    # Execute SQL query and read data into DataFrame
     df3 = pd.read_sql(query3, cnxn)
-    plt.figure(figsize=(10, 8))
-    sns.barplot(x='ITEM_ID', y='Purchase_Count', data=df3)
+
+    # Set the style of seaborn plots
+    sns.set_style("whitegrid")
+
+    # Create the plot
+    plt.figure(figsize=(12, 8))
+    sns.barplot(x='ITEM_ID', y='Purchase_Count', data=df3.head(10), palette="viridis") # Showing only top 10 items for better readability
+    plt.title('Top 10 Items by Purchase Count')
     plt.xlabel('Item ID')
     plt.ylabel('Purchase Count')
+
+    # Rotate x-axis labels for better readability
     plt.xticks(rotation=45)
+
+    # Add data labels to the bars
+    for index, row in df3.head(10).iterrows():
+        plt.text(row.name, row['Purchase_Count'] + 0.2, row['Purchase_Count'], ha='center', color='black')
+
+    # Save the plot to a file
     Viz3 = 'static/Purchases_Per_ItemID.png'
+    plt.tight_layout()
     plt.savefig(Viz3)
     plt.close()
 
@@ -88,16 +121,17 @@ def index():
 
     #############  QUERY-5: Number of products with different ratings ###############
     query5 = """
-                SELECT RATING, COUNT(*) AS Purchase_Count 
-                FROM PRODUCT GROUP BY RATING
-                ORDER BY RATING;
-                """
+              SELECT RATING, COUNT(*) AS Purchase_Count 
+              FROM PRODUCT GROUP BY RATING
+              ORDER BY RATING;
+              """
     df5 = pd.read_sql(query5, cnxn)
-    plt.figure(figsize=(5, 4))
-    sns.barplot(x='RATING', y='Purchase_Count', data=df5)
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x='RATING', y='Purchase_Count', data=df5, palette=sns.color_palette("husl", 5))
+    plt.grid(axis='y', color='lightgray')
     plt.xlabel('Rating')
     plt.ylabel('Number of Products')
-    plt.title('Number of Products with Different Ratings')
+    plt.title('Product Ratings')
     Viz5 = 'static/Product_Ratings.png'
     plt.savefig(Viz5)
     plt.close()
@@ -109,15 +143,22 @@ def index():
                 ORDER BY Purchase_Count DESC;
                 """
     df6 = pd.read_sql(query6, cnxn)
+
+    # Set a modern style using seaborn
+    sns.set_style("whitegrid")
+
+    # Create the bar plot
     plt.figure(figsize=(5, 4))
-    sns.barplot(x='MODEL_ATTR', y='Purchase_Count', data=df6)
-    plt.xlabel('Model Attribute')
-    plt.ylabel('Purchase Count')
-    plt.title('Number of Purchases Based on Model Attribute')
-    plt.xticks(rotation=45)
+    sns.barplot(x='MODEL_ATTR', y='Purchase_Count', data=df6, palette='viridis')  # Adjust the palette for a modern look
+    plt.xlabel('Model Attribute', fontsize=6)
+    plt.ylabel('Purchase Count', fontsize=6)
+    plt.xticks(rotation=45, ha='right', fontsize=5)
+    plt.yticks(fontsize=5)
+    plt.tight_layout()
+
+    # Save the plot
     Viz6 = 'static/Products_Based_on_Model_Attribute.png'
-    plt.savefig(Viz6)
-    plt.close()
+    plt.savefig(Viz6, dpi=300)
 
     #############  QUERY-7: NUMBER OF PURCHASES MADE IN EACH MONTH BASED ON PARTICULAR YEAR ###############
     years = range(1999, 2007)  # Range of years to visualize
@@ -162,7 +203,6 @@ def index():
     sns.barplot(x='BRAND', y='Avg_Rating', data=df8)
     plt.xlabel('Brand')
     plt.ylabel('Average Rating')
-    plt.title('Average Rating Based on Brand')
     plt.xticks(rotation=45)
     Viz8 = 'static/AverageRatings_Based_On_Brand.png'
     plt.savefig(Viz8)
@@ -184,7 +224,6 @@ def index():
     plt.bar(df9['BRAND'], df9['Avg_Rating'], color='skyblue')
     plt.xlabel('Brand')
     plt.ylabel('Average Rating')
-    plt.title('Top 3 Brands with Highest Average Rating')
     plt.xticks(rotation=45)
     plt.tight_layout()
     Viz9 = 'static/Top_3_Brands_With_Highest_Avg_Rating.png'
