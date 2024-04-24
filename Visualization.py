@@ -127,13 +127,15 @@ def index():
               """
     df5 = pd.read_sql(query5, cnxn)
     plt.figure(figsize=(10, 6))
-    sns.barplot(x='RATING', y='Purchase_Count', data=df5, palette=sns.color_palette("husl", 5))
-    plt.grid(axis='y', color='lightgray')
-    plt.xlabel('Rating')
-    plt.ylabel('Number of Products')
+    sns.barplot(x='Purchase_Count', y='RATING', data=df5, palette=sns.color_palette("husl", 5), orient='h')  # Use orient='h' to invert the graph
+    plt.grid(axis='x', color='lightgray')
+    plt.xlabel('Number of Products')
+    plt.ylabel('Rating')
     plt.title('Product Ratings')
+    plt.tight_layout()
+    
     Viz5 = 'static/Product_Ratings.png'
-    plt.savefig(Viz5)
+    plt.savefig(Viz5, dpi=300)
     plt.close()
 
     #############  QUERY-6: Number of purchases based on Model Attributes ###############
@@ -148,10 +150,10 @@ def index():
     sns.set_style("whitegrid")
 
     # Create the bar plot
-    plt.figure(figsize=(5, 4))
-    sns.barplot(x='MODEL_ATTR', y='Purchase_Count', data=df6, palette='viridis')  # Adjust the palette for a modern look
-    plt.xlabel('Model Attribute', fontsize=6)
-    plt.ylabel('Purchase Count', fontsize=6)
+    plt.figure(figsize=(5, 2))
+    sns.barplot(x='Purchase_Count', y='MODEL_ATTR', data=df6, palette='viridis')  # Adjust the palette for a modern look
+    plt.xlabel('Purchase Count', fontsize=6)
+    plt.ylabel('Model Attribute', fontsize=6)
     plt.xticks(rotation=45, ha='right', fontsize=5)
     plt.yticks(fontsize=5)
     plt.tight_layout()
@@ -161,37 +163,48 @@ def index():
     plt.savefig(Viz6, dpi=300)
 
     #############  QUERY-7: NUMBER OF PURCHASES MADE IN EACH MONTH BASED ON PARTICULAR YEAR ###############
+    # Set a modern color scheme
+    colors = plt.cm.viridis.colors
+
+    # Set a modern font
+    plt.rcParams['font.family'] = 'Arial'
+
     years = range(1999, 2007)  # Range of years to visualize
 
-    fig, axes = plt.subplots(4, 2, figsize=(8,8))
+    fig, axes = plt.subplots(4, 2, figsize=(12, 12))
 
     for i, year in enumerate(years):
         query7 = f"""SELECT MONTH, COUNT(*) AS Purchase_Count FROM PURCHASE 
-                    WHERE YEAR = {year} GROUP BY YEAR, MONTH 
-                    ORDER BY MONTH;"""
+                     WHERE YEAR = {year} GROUP BY YEAR, MONTH 
+                     ORDER BY MONTH;"""
         df7 = pd.read_sql(query7, cnxn)
-        
+
         # Check if the dataframe is empty
         if not df7.empty:
             row = i // 2
             col = i % 2
             ax = axes[row, col]
-            ax.bar(df7['MONTH'], df7['Purchase_Count'])
-            ax.set_title(f'Year {year}')
-            ax.set_xlabel('Month')
-            ax.set_ylabel('Purchase Count')
+            ax.bar(df7['MONTH'], df7['Purchase_Count'], color=colors[i])
+            ax.set_title(f'Year {year}', fontsize=14, fontweight='bold')  # Larger and bolder title
+            ax.set_xlabel('Month', fontsize=12)  # Larger font for x-axis label
+            ax.set_ylabel('Purchase Count', fontsize=12)  # Larger font for y-axis label
+            ax.grid(True, linestyle='--', alpha=0.5)  # Add grid lines
         else:
             # If dataframe is empty, set a placeholder title
             row = i // 2
             col = i % 2
             ax = axes[row, col]
-            ax.set_title(f'Year {year} (No Data)')
+            ax.set_title(f'Year {year} (No Data)', fontsize=14, fontweight='bold', color='gray')  # Placeholder title
             ax.axis('off')  # Turn off axis for empty plots
-            
+
     plt.tight_layout()
+    plt.suptitle('Monthly Purchases by Year', fontsize=16, fontweight='bold')  # Larger and bolder overall title
+    plt.subplots_adjust(top=0.92)  # Adjust top space for the overall title
     Viz7 = 'static/Monthly_Purchases_By_Year.png'
-    plt.savefig(Viz7)
+    plt.savefig(Viz7, dpi=300, bbox_inches='tight')  # Save with higher resolution and tighter bounding box
     plt.close()
+
+
 
     #############  QUERY-8: AVERAGE RATING BASED ON BRAND ###############
     query8 = """
@@ -209,6 +222,8 @@ def index():
     plt.close()
 
     #############  QUERY-9: Identify the top 3 brands with the highest average rating ###############
+    # Assuming you have defined cnxn and imported relevant libraries
+
     query9 = """
             SELECT *
             FROM (
@@ -220,24 +235,48 @@ def index():
             WHERE rank <= 3;
             """
     df9 = pd.read_sql(query9, cnxn)
-    plt.figure(figsize=(4, 6))
-    plt.bar(df9['BRAND'], df9['Avg_Rating'], color='skyblue')
+
+    # Define colors for the bars
+    colors = ['#ff9999', '#66b3ff', '#99ff99']
+
+    # Create the plot
+    plt.figure(figsize=(8, 10))
+    bars = plt.bar(df9['BRAND'], df9['Avg_Rating'], color=colors)
+
+    # Add data labels on top of bars
+    for bar, rating in zip(bars, df9['Avg_Rating']):
+        plt.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.05, round(rating, 2), ha='center', color='black', fontsize=10)
+
+    # Title and labels
     plt.xlabel('Brand')
     plt.ylabel('Average Rating')
     plt.xticks(rotation=45)
+    plt.ylim(0, 5)  # Set y-axis limit to 0-5 for better visualization
+
+    # Remove the top and right spines
+    plt.gca().spines['top'].set_visible(False)
+    plt.gca().spines['right'].set_visible(False)
+
+    # Adjust layout
     plt.tight_layout()
+
+    # Save the plot
     Viz9 = 'static/Top_3_Brands_With_Highest_Avg_Rating.png'
     plt.savefig(Viz9)
-    plt.close()
+
 
     #############  QUERY-10: IDENTIFYING THE SALES PER YEAR IN QUARTERS ###############
-    years = range(1999, 2007)  # Range of years to visualize
 
-    fig, axes = plt.subplots(8, 1, figsize=(9, 16))  # 8 rows, 1 column for vertical arrangement
+    # Define the range of years to visualize
+    years = range(1999, 2007)
 
+    # Create a figure with 8 rows and 1 column for vertical arrangement
+    fig, axes = plt.subplots(8, 1, figsize=(9, 16))
+
+    # Loop through each year
     for i, year in enumerate(years):
         ax = axes[i]  # Select the axis for the current year
-        
+
         # Query to select data for each year
         query10 = f"""
                 SELECT CASE
@@ -258,7 +297,12 @@ def index():
                         END;
                 """
         df10 = pd.read_sql(query10, cnxn)
-        ax.bar(df10['Quarter'], df10['Purchase_Count'], color='skyblue')
+
+        # Select color from 'tab10' colormap
+        color = plt.cm.tab10(i % 10)
+
+        # Plot the bar chart with the selected color
+        ax.bar(df10['Quarter'], df10['Purchase_Count'], color=color)
         ax.set_title(f'Year {year}')
         ax.set_xlabel('Quarter')
         ax.set_ylabel('Purchase Count')
@@ -267,6 +311,7 @@ def index():
     Viz10 = 'static/Purchase_Count_By_Quarter.png'
     plt.savefig(Viz10)
     plt.close()
+
 
 
     return render_template('index.html', Viz1='static/Purchases_Per_Year.png',
