@@ -326,5 +326,9 @@ def index():
                            Viz10='static/Purchase_Count_By_Quarter.png',
                            )
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('sed.html'), 404
+
 if __name__ == '__main__':
     app.run(debug=True)
