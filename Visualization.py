@@ -329,6 +329,9 @@ def index():
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('sed.html'), 404
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
