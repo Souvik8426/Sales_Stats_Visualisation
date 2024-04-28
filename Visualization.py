@@ -131,7 +131,6 @@ def index():
     plt.grid(axis='x', color='lightgray')
     plt.xlabel('Number of Products')
     plt.ylabel('Rating')
-    plt.title('Product Ratings')
     plt.tight_layout()
     
     Viz5 = 'static/Product_Ratings.png'
