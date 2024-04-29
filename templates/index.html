@@ -68,6 +68,70 @@
       width: 10px;
       height: 10px;
     }
+    /* GitHub Button */
+/* GitHub Button */
+.btn-github {
+  /* Gradient with three colors */
+  background: linear-gradient(to right, #485461, #334756, #1e40af);
+  color: #fff; /* White text */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Add rounded corners */
+  padding: 10px 20px; /* Increase padding for better spacing */
+  font-weight: bold; /* Bold text for emphasis */
+  transition: all 0.3s ease-in-out; /* Smooth transition on hover */
+}
+
+.btn-github:hover {
+  /* Change background color on hover */
+  background: linear-gradient(to right, #1e40af, #334756, #485461);
+  /* Add subtle box shadow on hover */
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer; /* Indicate clickable action */
+}
+
+/* LinkedIn Button */
+.btn-linkedin {
+  /* Gradient with two colors */
+  background: linear-gradient(to right, #0077b5, #00a5e0);
+  color: #fff; /* White text */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Add rounded corners */
+  padding: 10px 20px; /* Increase padding for better spacing */
+  font-weight: bold; /* Bold text for emphasis */
+  transition: all 0.3s ease-in-out; /* Smooth transition on hover */
+}
+
+.btn-linkedin:hover {
+  /* Change background color on hover */
+  background: linear-gradient(to right, #00a5e0, #0077b5);
+  /* Add subtle box shadow on hover */
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer; /* Indicate clickable action */
+}
+
+
+/* Instagram Button */
+.btn-instagram {
+  /* Gradient with three colors */
+  background: linear-gradient(to right, #f0943b, #ec6891, #e843c8); /* Instagram gradient colors */
+  color: #fff; /* White text */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Add rounded corners */
+  padding: 10px 20px; /* Increase padding for better spacing */
+  font-weight: bold; /* Bold text for emphasis */
+  transition: all 0.3s ease-in-out; /* Smooth transition on hover */
+}
+
+.btn-instagram:hover {
+  /* Change background color order on hover (mirroring Instagram logo gradient) */
+  background: linear-gradient(to right, #e843c8, #ec6891, #f0943b);
+  /* Add subtle box shadow on hover */
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer; /* Indicate clickable action */
+}
+
+
+
     </style>
 </head>
 <body>
@@ -406,25 +470,26 @@
                     <h3 class="card-title">Souvik Ruhidas</h3>
                     <p class="card-text">Frontend Developer</p>
                     <!-- GitHub Button -->
-                    <div class="d-flex justify-content-center">
-                        <a href="https://github.com/Souvik8426"  target = "_blank" class="btn btn-dark btn-block">
-                            <i class="fab fa-github"></i> GitHub
-                        </a>
-                    </div>
-                    <br>
-                    <!-- LinkedIn Button -->
-                    <div class="d-flex justify-content-center">
-                        <a href="https://www.linkedin.com/in/souvik-ruhidas-75b166245/"  target = "_blank"  class="btn btn-primary btn-block">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
-                    </div>
-                    <br>
-                    <!-- Instagram Button -->
-                    <div class="d-flex justify-content-center">
-                        <a href="https://www.instagram.com/inu_sannnnn/"  target = "_blank" class="btn btn-danger btn-block">
-                            <i class="fab fa-instagram"></i> Instagram
-                        </a>
-                    </div>
+<div class="d-flex justify-content-center">
+    <a href="https://github.com/Souvik8426" target="_blank" class="btn btn-github btn-block">
+        <i class="fab fa-github"></i> GitHub
+    </a>
+</div>
+<br>
+<!-- LinkedIn Button -->
+<div class="d-flex justify-content-center">
+    <a href="https://www.linkedin.com/in/souvik-ruhidas-75b166245/" target="_blank" class="btn btn-linkedin btn-block">
+        <i class="fab fa-linkedin"></i> LinkedIn
+    </a>
+</div>
+<br>
+<!-- Instagram Button -->
+<div class="d-flex justify-content-center">
+    <a href="https://www.instagram.com/inu_sannnnn/" target="_blank" class="btn btn-instagram btn-block">
+        <i class="fab fa-instagram"></i> Instagram
+    </a>
+</div>
+
                 </div>
             </div>
         </div>
@@ -436,21 +501,21 @@
                     <p class="card-text">Backend Developer</p>
                     <!-- GitHub Button -->
                     <div class="d-flex justify-content-center">
-                        <a href="https://github.com/YassarSharief"  target = "_blank" class="btn btn-dark btn-block">
+                        <a href="https://github.com/YassarSharief" target="_blank" class="btn btn-github btn-block">
                             <i class="fab fa-github"></i> GitHub
                         </a>
                     </div>
                     <br>
                     <!-- LinkedIn Button -->
                     <div class="d-flex justify-content-center">
-                        <a href="https://www.linkedin.com/in/yassar-sharief-5439452b9/"  target = "_blank"  class="btn btn-primary btn-block">
+                        <a href="https://www.linkedin.com/in/yassar-sharief-5439452b9/" target="_blank" class="btn btn-linkedin btn-block">
                             <i class="fab fa-linkedin"></i> LinkedIn
                         </a>
                     </div>
                     <br>
                     <!-- Instagram Button -->
                     <div class="d-flex justify-content-center">
-                        <a href="https://www.instagram.com/yassar_sharieff"  target = "_blank"  class="btn btn-danger btn-block">
+                        <a href="https://www.instagram.com/yassar_sharieff" target="_blank" class="btn btn-instagram btn-block">
                             <i class="fab fa-instagram"></i> Instagram
                         </a>
                     </div>
@@ -464,25 +529,26 @@
                     <h3 class="card-title">Daksh Sharma</h3>
                     <p class="card-text">Data Analist</p>
                     <!-- GitHub Button -->
-                    <div class="d-flex justify-content-center">
-                        <a href="../templates/sed.html"  target = "_blank" class="btn btn-dark btn-block">
-                            <i class="fab fa-github"></i> GitHub
-                        </a>
-                    </div>
-                    <br>
-                    <!-- LinkedIn Button -->
-                    <div class="d-flex justify-content-center">
-                        <a href="../templates/sed.html"  target = "_blank"  class="btn btn-primary btn-block">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
-                    </div>
-                    <br>
-                    <!-- Instagram Button -->
-                    <div class="d-flex justify-content-center">
-                        <a href="../templates/sed.html" target = "_blank" class="btn btn-danger btn-block">
-                            <i class="fab fa-instagram"></i> Instagram
-                        </a>
-                    </div>
+<div class="d-flex justify-content-center">
+    <a href="../templates/sed.html" target="_blank" class="btn btn-github btn-block">
+        <i class="fab fa-github"></i> GitHub
+    </a>
+</div>
+<br>
+<!-- LinkedIn Button -->
+<div class="d-flex justify-content-center">
+    <a href="../templates/sed.html" target="_blank" class="btn btn-linkedin btn-block">
+        <i class="fab fa-linkedin"></i> LinkedIn
+    </a>
+</div>
+<br>
+<!-- Instagram Button -->
+<div class="d-flex justify-content-center">
+    <a href="../templates/sed.html" target="_blank" class="btn btn-instagram btn-block">
+        <i class="fab fa-instagram"></i> Instagram
+    </a>
+</div>
+
                 </div>
             </div>
         </div>
