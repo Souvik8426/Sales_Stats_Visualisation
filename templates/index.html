@@ -130,7 +130,92 @@
   cursor: pointer; /* Indicate clickable action */
 }
 
+#contact {
+  background-color: #f8f9fa;
+  padding: 5rem 0;
+}
 
+#contact h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #4a4a4a;
+}
+
+#contact p {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin-bottom: 4rem;
+}
+
+#contact ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#contact li {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+#contact li::before {
+  content: "";
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: #4a4a4a;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+}
+
+#contact a {
+  color: #4a4a4a;
+  text-decoration: none;
+}
+
+#contact form {
+  margin-top: 3rem;
+}
+
+#contact label {
+  font-size: 1.1rem;
+  color: #4a4a4a;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+#contact input,
+#contact textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  font-size: 1.1rem;
+  color: #4a4a4a;
+  margin-bottom: 2rem;
+}
+
+#contact textarea {
+  resize: vertical;
+}
+
+#contact button {
+  background-color: #4a4a4a;
+  color: #f8f9fa;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#contact button:hover {
+  background-color: #333333;
+}
 
     </style>
 </head>
