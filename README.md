@@ -1,7 +1,6 @@
 # Overview
 
-This project aims to analyze social media usage statistics based on survey data. The project collects responses from participants regarding their social media usage habits and preferences. The collected data is then processed and visualized in the form of graphs to provide insights into social media usage trends.
-
+In today's competitive business landscape, data-driven decision-making is paramount for success. Our sales visualization project aims to transform raw data into actionable insights, empowering stakeholders to make informed decisions swiftly and confidently. Through intuitive visualizations, we provide a comprehensive overview of sales performance, trends, and opportunities, enabling stakeholders to identify patterns, forecast future outcomes, and optimize strategies for sustainable growth. Harnessing the power of data visualization, we facilitate a deeper understanding of sales dynamics, driving efficiency, agility, and strategic alignment across the organization.
 
 # Features
 
